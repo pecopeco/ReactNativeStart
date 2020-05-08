@@ -5,11 +5,11 @@ class Home extends Component {
   render () {
     return (pug`
       View(style=styles.body)
-        Text(style=styles.text) Home
+        Text this is Home
         View(style=styles.btn)
           Button(
             title="Go Details"
-            onPress=() => this.props.navigation.navigate('Detail', {text: 'anything you want here'})
+            onPress=() => this.props.navigation.navigate('Detail', {text: 'get home message'})
           )
     `)
   }

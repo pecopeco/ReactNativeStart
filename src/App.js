@@ -51,7 +51,8 @@ function App () {
               img = focused ? require('./assets/my-check.png') : require('./assets/my.png')
             }
             return <Image style={{width: 25, height: 25}} source={img} />
-          }
+          },
+          tabBarVisible: !route.state || route.state.index === 0
         })}
         tabBarOptions={{
           activeTintColor: '#00dbde',
