@@ -27,9 +27,9 @@ const HomeStack = createStackNavigator()
 function HomeStackScreen () {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="Detail" component={DetailScreen} />
-      <HomeStack.Screen name="Setting" component={SettingScreen} />
+      <HomeStack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+      <HomeStack.Screen name="Detail" component={DetailScreen} options={{ title: 'detail' }} />
+      <HomeStack.Screen name="Setting" component={SettingScreen} options={{ title: 'setting' }} />
     </HomeStack.Navigator>
   )
 }
@@ -62,8 +62,8 @@ function App () {
             inactiveTintColor: 'gray',
           }}
         >
-          <Tab.Screen name="Home" component={HomeStackScreen} />
-          <Tab.Screen name="My" component={MyScreen} />
+          <Tab.Screen name="Home" component={HomeStackScreen} options={{ tabBarLabel: 'Home' }}/>
+          <Tab.Screen name="My" component={MyScreen} options={{ tabBarLabel: 'My' }}/>
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
