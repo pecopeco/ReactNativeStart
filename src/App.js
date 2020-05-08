@@ -3,6 +3,8 @@ import { View, Text, Button, Image } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import store from './store'
+import { Provider } from "mobx-react"
 
 import Home from './views/home'
 import My from './views/my'
@@ -40,29 +42,31 @@ const Tab = createBottomTabNavigator()
 
 function App () {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let img
-            if (route.name === 'Home') {
-              img = focused ? require('./assets/home-check.png') : require('./assets/home.png')
-            } else if (route.name === 'My') {
-              img = focused ? require('./assets/my-check.png') : require('./assets/my.png')
-            }
-            return <Image style={{width: 25, height: 25}} source={img} />
-          },
-          tabBarVisible: !route.state || route.state.index === 0
-        })}
-        tabBarOptions={{
-          activeTintColor: '#00dbde',
-          inactiveTintColor: 'gray',
-        }}
-      >
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="My" component={MyScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Provider {...store}>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let img
+              if (route.name === 'Home') {
+                img = focused ? require('./assets/home-check.png') : require('./assets/home.png')
+              } else if (route.name === 'My') {
+                img = focused ? require('./assets/my-check.png') : require('./assets/my.png')
+              }
+              return <Image style={{width: 25, height: 25}} source={img} />
+            },
+            tabBarVisible: !route.state || route.state.index === 0
+          })}
+          tabBarOptions={{
+            activeTintColor: '#00dbde',
+            inactiveTintColor: 'gray',
+          }}
+        >
+          <Tab.Screen name="Home" component={HomeStackScreen} />
+          <Tab.Screen name="My" component={MyScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
 

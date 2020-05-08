@@ -2,21 +2,21 @@ import React, { Component } from 'react'
 import { StyleSheet, Button, View, Text, StatusBar } from 'react-native'
 
 class Detail extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+    }
+  }
+  
   render () {
     return (pug`
       View(style=styles.body)
-        Text this is detail
-        Text #{this.props.route.params.text}
+        Text(style=styles.text) this is detail
+        Text(style=styles.text) #{this.props.route.params.text}
         View(style=styles.btn)
-          Button(
-            title="Go Setting"
-            onPress=() => this.props.navigation.navigate('Setting')
-          )
+          Button(title="go setting" onPress=() => this.props.navigation.navigate('Setting'))
         View(style=styles.btn)
-          Button(
-            title="Go Back"
-            onPress=() => this.props.navigation.goBack()
-          )
+          Button(title="go back" onPress=() => this.props.navigation.goBack())
     `)
   }
 }
@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  text: {
+    marginTop: 20
   },
   btn: {
     marginTop: 50
