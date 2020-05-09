@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
-import { StyleSheet, Button, View, Text } from 'react-native'
+import { StatusBar, StyleSheet, Button, View, Text } from 'react-native'
 import { observer, inject } from 'mobx-react'
-import { $http } from '../../fly'
+import { $http, easyTost, formatTime } from '../../mixin'
 
 @inject(['userInfo'])
 @observer
 class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      name: 'start'
-    }
+  state = {
+    defaultData: 'defaulData'
   }
 
   async componentDidMount () {
+    easyTost('start http get')
     let res = await $http.get('/api/user', {id: 1})
     console.log(res)
   }
@@ -21,9 +19,11 @@ class Home extends Component {
   render () {
     return (pug`
       View(style=styles.body)
-        Text this is Home
-        Text(style=styles.text) the state is #{this.state.name}
+        StatusBar(backgroundColor="#fff" barStyle="dark-content")
+        Text page is Home
+        Text(style=styles.text) the state is #{this.state.defaultData}
         Text(style=styles.text) the store is #{this.props.userInfo.username}
+        Text(style=styles.text) the time is #{formatTime(1589004082463 / 1000, '-', '-', '', true, true)}
         View(style=styles.btn)
           Button(title="go detail" onPress=() => this.props.navigation.navigate('Detail', {text: 'this is home message'}))
     `)

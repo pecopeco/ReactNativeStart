@@ -5,16 +5,13 @@ import { observer, inject } from 'mobx-react'
 @inject(['userInfo'])
 @observer
 class Setting extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
+  state = {
   }
   
   render () {
     return (pug`
       View(style=styles.body)
-        Text(style=styles.text) this is setting
+        Text(style=styles.text) page is setting
         Text(style=styles.text) the name is #{this.props.userInfo.username}
         View(style=styles.btn)
           Button(title="update userinfo" onPress=() => this.props.userInfo.getUserInfo('li'))

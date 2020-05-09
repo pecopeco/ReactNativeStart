@@ -2,16 +2,13 @@ import React, { Component } from 'react'
 import { StyleSheet, Button, View, Text, StatusBar } from 'react-native'
 
 class Detail extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
+  state = {
   }
   
   render () {
     return (pug`
       View(style=styles.body)
-        Text(style=styles.text) this is detail
+        Text(style=styles.text) page is detail
         Text(style=styles.text) #{this.props.route.params.text}
         View(style=styles.btn)
           Button(title="go setting" onPress=() => this.props.navigation.navigate('Setting'))
