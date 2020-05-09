@@ -1,4 +1,15 @@
 import fly from 'flyio'
+import { WToast, WSnackBar } from 'react-native-smart-tip'
+
+let errTost = (data) => {
+  WSnackBar.show({
+    data: data,
+    position: WSnackBar.position.TOP,
+    duration: WToast.duration.LONG,
+    backgroundColor: 'red',
+    textColor: '#ffffff'
+  })
+}
 
 let config = {
   api_url: 'https://xxx.com'
@@ -62,7 +73,7 @@ let $http = (url, form = {}, type) => {
     } else if (res.status === 200) {
       return res.data
     } else {
-      alert(JSON.parse(res.data).error.msg)
+      errTost(JSON.parse(res.data).error.msg)
     }
   }).catch((err) => {
     delayRequest()
@@ -84,7 +95,7 @@ let $http = (url, form = {}, type) => {
       504: '网关超时'
     }
     const errortext = codeMessage[err.status] || err.message
-    alert(errortext)
+    errTost(errortext)
   })
 }
 
