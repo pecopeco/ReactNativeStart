@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Button, View, Text } from 'react-native'
 import { observer, inject } from 'mobx-react'
+import { $http } from '../../fly'
 
 @inject(['userInfo'])
 @observer
@@ -10,6 +11,11 @@ class Home extends Component {
     this.state = {
       name: 'start'
     }
+  }
+
+  async componentDidMount () {
+    let res = await $http.get('/api/user', {id: 1})
+    console.log(res)
   }
 
   render () {
