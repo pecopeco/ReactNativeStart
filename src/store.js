@@ -3,17 +3,30 @@ import { observable, action } from "mobx"
 class UserInfo {
   @observable username
 
-  constructor() {
-    this.username = 'yang'
+  constructor () {
+    this.username = ''
   }
   
-  @action getUserInfo = (name) => {
+  @action setUserInfo = (name) => {
     this.username = name
   }
 }
 
-const userInfo = new UserInfo()
+class Token {
+  @observable token
 
-const store = { userInfo }
+  constructor () {
+    this.token = ''
+  }
+  
+  @action setToken = (token) => {
+    this.token = token
+  }
+}
+
+const userInfo = new UserInfo()
+const token = new Token()
+
+const store = { userInfo, token }
 
 export default store

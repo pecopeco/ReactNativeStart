@@ -5,12 +5,15 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Provider } from "mobx-react"
 import store from './store'
+import storage from './storage'
 
 import Login from './views/login'
 import Home from './views/home'
 import My from './views/my'
 import Detail from './views/home/detail'
 import Setting from './views/home/setting'
+
+storage.set('token', '123')   // 测试token
 
 let StackNavigator = createStackNavigator().Navigator
 let StackScreen = createStackNavigator().Screen
@@ -23,8 +26,17 @@ const HomeStackScreen = () => {
       StackScreen(name="Home" component=Home options={headerShown: false, headerTitle: ''})
       StackScreen(name="Detail" component=Detail options={headerTitle: 'detail'})
       StackScreen(name="Setting" component=Setting options={headerTitle: 'setting'})
+      StackScreen(name="Login" component=Login options={headerShown: false})
     `)
 }
+
+let token
+storage.get('token').then((res) => {
+  if (res) {
+    token = res
+    this && this.forceUpdate && this.forceUpdate()   // 第一次进APP取到token，重绘页面
+  }
+})
 
 const App = () => {
   const Icon = (src) => {
@@ -35,11 +47,12 @@ const App = () => {
   return (pug`
     Provider(...store)
       NavigationContainer
-        if 0 > 1
+        if token
           TabNavigator(
             screenOptions=({ route }) => ({ tabBarVisible: !route.state || route.state.index === 0 })
             tabBarOptions={ activeTintColor: '#00dbde', inactiveTintColor: 'gray' }
           )
+            
             TabScreen(name="Home" component=HomeStackScreen options={
               tabBarLabel: 'Home',
               tabBarIcon: ({ focused }) => {
@@ -54,7 +67,7 @@ const App = () => {
             })
         else
           StackNavigator
-            StackScreen(name="Login" component=Login options={headerShown: false, headerTitle: '登录'})
+            StackScreen(name="Login" component=Login options={headerShown: false, headerTitle: 'login'})
   `)
 }
 

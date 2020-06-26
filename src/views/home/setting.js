@@ -14,7 +14,7 @@ class Setting extends Component {
         Text(style=styles.text) page is setting
         Text(style=styles.text) the name is #{this.props.userInfo.username}
         View(style=styles.btn)
-          Button(title="update userinfo" onPress=() => this.props.userInfo.getUserInfo('li'))
+          Button(title="update userinfo" onPress=() => this.props.userInfo.setUserInfo('li'))
         View(style=styles.btn)
           Button(title="go back" onPress=() => this.props.navigation.goBack())
     `)
