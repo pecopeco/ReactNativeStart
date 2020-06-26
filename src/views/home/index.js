@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StatusBar, StyleSheet, Button, View, Text } from 'react-native'
 import { observer, inject } from 'mobx-react'
-import { $http, easyTost, formatTime } from '../../mixin'
+import { http, easyTost, formatTime } from '../../mixin'
 
 @inject(['userInfo'])
 @observer
@@ -12,7 +12,7 @@ class Home extends Component {
 
   async componentDidMount () {
     easyTost('start http get')
-    let res = await $http.get('/api/user', {id: 1})
+    let res = await http.get('/api/user', {id: 1})
     console.log(res)
   }
 
