@@ -76,6 +76,7 @@ const http = (url, form = {}, type) => {
     method: type,
     timeout: 10000
   }).then((res) => {
+    console.log(url, res.data)
     delayRequest()
     if (type === 'delete' || res.status === 204) {
       return res.text()
@@ -85,6 +86,7 @@ const http = (url, form = {}, type) => {
       errTost(JSON.parse(res.data).error.msg)
     }
   }).catch((err) => {
+    console.log(url, err)
     delayRequest()
     const codeMessage = {
       200: '服务器成功返回请求的数据.',
