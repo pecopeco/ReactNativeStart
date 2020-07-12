@@ -2,7 +2,11 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 class Storage {
   async set (key, value) {
-    await AsyncStorage.setItem(key, value)
+    let val = value
+    if (typeof val !== 'string') {
+      val = value.toString()
+    }
+    await AsyncStorage.setItem(key, val)
   }
   get (key) {
     return new Promise(async (resolve) => {
